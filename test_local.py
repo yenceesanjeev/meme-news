@@ -61,13 +61,10 @@ def generate_memes(text):
         # Get meme URLs from Supermeme
         response = requests.post(url, headers=headers, json={'text': text})
         all_meme_urls = response.json()['memes']
-        
-        # Randomly select 4 memes
-        selected_urls = random.sample(all_meme_urls, min(4, len(all_meme_urls)))
         meme_paths = []
         
-        # Download and save each selected meme
-        for i, meme_url in enumerate(selected_urls, 1):
+        # Download and save each meme
+        for i, meme_url in enumerate(all_meme_urls, 1):
             img_response = requests.get(meme_url)
             if img_response.status_code == 200:
                 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -77,7 +74,7 @@ def generate_memes(text):
                 with open(filepath, 'wb') as f:
                     f.write(img_response.content)
                 meme_paths.append(filename)
-                print(f"✅ Saved meme {i}/4")
+                print(f"✅ Saved meme {i}/{len(all_meme_urls)}")
         
         print(f"✅ Generated and saved {len(meme_paths)} memes!")
         return meme_paths
