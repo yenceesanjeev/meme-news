@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meme News API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meme News API</h1>
+    <p>This is the API endpoint for Meme News. Access the data at:</p>
+    <pre><code>./memes.json</code></pre>
+    
+    <h2>JSON Structure</h2>
+    <pre><code>{
+  "news": [
+    {
+      "title": "News Title",
+      "date": "2024-12-16 04:32:00",
+      "generated_at": "2024-12-16 22:19:14",
+      "meme_files": [
+        "meme_20241216_221914_1.jpg",
+        "meme_20241216_221914_2.jpg",
+        "meme_20241216_221914_3.jpg",
+        "meme_20241216_221914_4.jpg"
+      ]
+    }
+  ]
+}</code></pre>
+
+    <h2>Images</h2>
+    <p>Access meme images at:</p>
+    <pre><code>./meme_images/[filename]</code></pre>
+</body>
+</html>

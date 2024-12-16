@@ -1,0 +1,37 @@
+name: Daily Meme Generation
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every 6 hours
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  generate-memes:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests python-dotenv
+    
+    - name: Run meme generator
+      env:
+        NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+        MEME_API_KEY: ${{ secrets.MEME_API_KEY }}
+      run: python test_local.py
+    
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name 'GitHub Actions Bot'
+        git config --global user.email 'actions@github.com'
+        git add docs/
+        git commit -m "Update memes" || exit 0
+        git push
